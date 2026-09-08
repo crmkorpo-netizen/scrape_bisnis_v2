@@ -34,6 +34,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add Bisnis_*.csv
+          git add Bisnis_*.xlsx
           git diff --staged --quiet || git commit -m "Update scraped data $(date +'%Y-%m-%d %H:%M:%S')"
           git push
