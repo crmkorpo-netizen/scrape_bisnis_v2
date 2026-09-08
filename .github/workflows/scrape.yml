@@ -25,7 +25,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pip install curl-cffi beautifulsoup4 pandas lxml
+          pip install curl-cffi beautifulsoup4 pandas lxml openpyxl
           
       - name: Run scraper
         run: python scraper.py
