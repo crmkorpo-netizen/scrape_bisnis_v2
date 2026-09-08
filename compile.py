@@ -97,7 +97,7 @@ def compile_and_clean():
             df_master = df_master.sort_values('Tanggal_Clean', ascending=False)
 
             #Delete tanggal clean
-            df_master  df_master.drop(colums=['Tanggal_Clean'])
+            df_master = df_master.drop(colums=['Tanggal_Clean'])
         except Exception as e:
             print(f"Can't sort date: {e}")
 
