@@ -2,8 +2,9 @@ name: Compile dan Hapus Duplikat
 
 on:
   schedule:
+    # Berjalan otomatis setiap hari Senin pukul 01:00 UTC (08:00 WIB)
     - cron: '0 1 * * 1'
-  workflow_dispatch:
+  workflow_dispatch: # Memungkinkan Anda menjalankan workflow ini secara manual dari tombol di GitHub
 
 permissions:
   contents: write
@@ -23,7 +24,9 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pip install pandas
+          python -m pip install --upgrade pip
+          # TAMBAHKAN openpyxl agar pandas bisa membaca & menulis file .xlsx
+          pip install pandas openpyxl
           
       - name: Run compile script
         run: python compile.py
@@ -32,6 +35,16 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          
+          # Daftarkan semua file hasil perubahan skrip ke Git stage
           git add Bisnis_Master*.xlsx
-          git diff --staged --quiet || git commit -m "Weekly compile: update master file $(date +'%Y-%m-%d')"
-          git push
+          
+          # Cek apakah ada perubahan file sebelum melakukan commit agar tidak eror
+          if ! git diff --staged --quiet; then
+            git commit -m "Weekly compile: update master file $(date +'%Y-%m-%d')"
+            # Menggunakan tolak-balik otomatis (pull rebase) jika ada konflik kecil di server GitHub
+            git pull --rebase origin main
+            git push
+          else
+            echo "Tidak ada perubahan data pada file Master Excel. Melewati proses commit."
+          fi
