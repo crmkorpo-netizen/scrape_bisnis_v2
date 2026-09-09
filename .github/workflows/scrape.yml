@@ -2,7 +2,7 @@ name: Scraping Otomatis Bisnis.com
 
 on:
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '17 */4 * * *'  # Mengubah menit ke 17 untuk menghindari antrean sibuk jam genap GitHub
   workflow_dispatch:
 
 permissions:
@@ -34,6 +34,15 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          
+          # Cek apakah ada file baru yang dihasilkan oleh scraper
           git add Bisnis_*.xlsx
-          git diff --staged --quiet || git commit -m "Update scraped data $(date +'%Y-%m-%d %H:%M:%S')"
-          git push
+          
+          # Jika ada perubahan, lakukan commit dan penggabungan aman (rebase) sebelum push
+          if ! git diff --staged --quiet; then
+            git commit -m "Update scraped data $(date +'%Y-%m-%d %H:%M:%S')"
+            git pull origin main --rebase
+            git push origin main
+          else
+            echo "Tidak ada data baru yang berubah, melewati proses push."
+          fi
