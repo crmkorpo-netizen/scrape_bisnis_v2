@@ -94,8 +94,8 @@ def compile_and_clean():
             df_master['Tanggal_Clean'] = pd.to_datetime(df_master['Tanggal_Clean'], errors='coerce')
 
             #tanggal to tanggal clean
-            df_master['Tanggal'] = df['tanggal_master'].copy()
-            df.drop(columns=['tanggal_proses'], inplace=True)
+            df_master['Tanggal'] = df_master['Tanggal_Clean'].copy()
+            df.drop(columns=['Tanggal_Clean'], inplace=True)
                 
             #sorting descending
             df_master = df_master.sort_values('Tanggal_Clean', ascending=False)
