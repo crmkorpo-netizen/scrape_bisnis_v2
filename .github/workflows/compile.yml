@@ -3,7 +3,7 @@ name: Compile dan Hapus Duplikat
 on:
   schedule:
     # Berjalan otomatis setiap hari Senin pukul 01:00 UTC (08:00 WIB)
-    - cron: '0 1 * * 1'
+    - cron: '0 23 * * *'
   workflow_dispatch: # Memungkinkan Anda menjalankan workflow ini secara manual dari tombol di GitHub
 
 permissions:
