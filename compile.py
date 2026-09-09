@@ -83,6 +83,7 @@ def compile_and_clean():
     df_master = df_master.drop_duplicates(subset=['Link'], keep='first')
     after = len(df_master)
     print(f"Hapus duplikat: {before - after} baris terhapus")
+    print(f"Baris tersisa: {after} baris")
     
     # Sortir berdasarkan tanggal (jika kolom Tanggal ada)
     if 'Tanggal' in df_master.columns:
@@ -105,7 +106,7 @@ def compile_and_clean():
         except Exception as e:
             print(f"Tidak bisa sortir tanggal: {e}")
 
-    df_master = df_master.drop(colums=['Tanggal_Clean'])
+    df_master = df_master.drop(columns=['Tanggal_Clean'])
         
     # Simpan ke file master
     
