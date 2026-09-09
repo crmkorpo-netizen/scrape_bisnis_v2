@@ -104,17 +104,18 @@ def compile_and_clean():
             df_master = df_master.drop(colums=['Tanggal_Clean'])
         except Exception as e:
             print(f"Can't sort date: {e}")
-
+        
     # Simpan ke file master
+    df_master = df_master.drop(colums=['Tanggal_Clean'])
     filename = "Bisnis_Master.xlsx"
     df_master.to_excel(filename, index=False)
     print(f"\nSelesai! {len(df_master)} artikel unik disimpan ke {filename}")
     
     # Juga simpan dengan timestamp
-    timestamp = datetime.now().strftime("%Y%m%d")
-    backup_filename = f"Bisnis_Master_{timestamp}.xlsx"
-    df_master.to_excel(backup_filename, index=False)
-    print(f"Backup: {backup_filename}")
+    #timestamp = datetime.now().strftime("%Y%m%d")
+    #backup_filename = f"Bisnis_Master_{timestamp}.xlsx"
+    #df_master.to_excel(backup_filename, index=False)
+    #print(f"Backup: {backup_filename}")
 
 if __name__ == "__main__":
     compile_and_clean()
