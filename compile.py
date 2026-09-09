@@ -103,6 +103,7 @@ def compile_and_clean():
             # #Delete tanggal clean
             #df_master = df_master.drop(colums=['Tanggal_Clean'])
         except Exception as e:
+            print(f"Tidak bisa sortir tanggal: {e}")
 
     df_master = df_master.drop(colums=['Tanggal_Clean'])
         
