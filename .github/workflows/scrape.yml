@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install curl-cffi beautifulsoup4 pandas lxml openpyxl playwright
-          playwright install chroium
+          playwright install chromium
           playwright install-deps
           
       - name: Run scraper
